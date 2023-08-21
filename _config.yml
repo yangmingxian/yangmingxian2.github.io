@@ -18,7 +18,7 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: YMX # the main title
+title: YMX's Blog # the main title
 
 tagline: AI and Game Design # it will display as the sub-title
 
