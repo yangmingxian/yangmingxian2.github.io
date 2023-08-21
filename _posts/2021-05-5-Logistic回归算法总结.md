@@ -1,12 +1,12 @@
 ---
 title: Logistic回归算法总结
+author: Mingxian Yang
+date: 2023-08-19 18:10:00 +0800
 description: 逻辑回归假设数据服从伯努利分布,通过极大化似然函数的方法，运用梯度下降来求解参数，来达到将数据二分类的目的。
-
-categories:
- - 机器学习
-tags:
- - 机器学习
-mathjax: true
+categories: [机器学习]
+tags: [机器学习]
+render_with_liquid: true
+math: true
 ---
 
 ### 介绍

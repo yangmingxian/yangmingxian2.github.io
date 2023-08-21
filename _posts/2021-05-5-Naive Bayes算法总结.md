@@ -1,12 +1,12 @@
 ---
 title: Naive Bayes算法总结
+author: Mingxian Yang
+date: 2023-08-19 18:10:00 +0800
 description: 在众多的分类模型中，应用最为广泛的两种分类模型是决策树模型(Decision Tree Model)和朴素贝叶斯模型（Naive Bayesian Model，NBC）。朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率。同时，NBC模型所需估计的参数很少，对缺失数据不太敏感，算法也比较简单。理论上，NBC模型与其他分类方法相比具有最小的误差率。但是实际上并非总是如此，这是因为NBC模型假设属性之间相互独立，这个假设在实际应用中往往是不成立的，这给NBC模型的正确分类带来了一定影响。在属性个数比较多或者属性之间相关性较大时，NBC模型的分类效率比不上决策树模型。而在属性相关性较小时，NBC模型的性能最为良好。
-
-categories:
- - 机器学习
-tags:
- - 机器学习
-mathjax: true
+categories: [机器学习,算法]
+tags: [机器学习]
+render_with_liquid: true
+math: true
 ---
 
 ### 思想

@@ -1,11 +1,12 @@
 ---
 title: 整理pandas的read_csv方法
+author: Mingxian Yang
+date: 2023-08-19 18:10:00 +0800
 description: 就读取数据是使用pandas做数据处理的第一步，数据源可以来自于各种地方，csv、XML、json等都是数据处理的常见数据源文件。而读取csv文件是数据处理中最为常用的一种。pandas提供了非常强力的支持，其提供了大量的参数以供user方便地读取csv文件。这些参数中，有的可能因为使用频率很低而经常被忽略，有的却很常见为读取数据提供了巨大的便利。这篇文章就为数据分析的csv数据读取做一个简要的汇总整理。
-categories:
- - Python
-tags:
- - Data Analysis
-mathjax: true
+categories: [Python,数据分析]
+tags: [Python]
+render_with_liquid: true
+math: true
 ---
 
 
