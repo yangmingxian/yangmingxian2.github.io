@@ -23,7 +23,7 @@ title: YMX's Blog # the main title
 tagline: AI and Game Design # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  这里是Mingxian Yang的个人博客 |AI and Game Design| 人工智能与游戏设计.
+  这里是 Mingxian Yang 的个人博客 | AI and Game Design | 人工智能与游戏设计.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: "https://yangmingxian.com"
@@ -53,7 +53,7 @@ google_site_verification: # fill in to your verification string
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: # fill in your Google Analytics ID
+  id: G-Q31RG0PX9R # fill in your Google Analytics ID
 
 # Prefer color scheme setting.
 #
