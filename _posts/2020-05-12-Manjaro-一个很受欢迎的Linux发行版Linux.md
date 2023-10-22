@@ -16,4 +16,4 @@ render_with_liquid: false
 直接进入官网进行下载[https://manjaro.org/](https://manjaro.org/)
 
 我下载的桌面版本是 KDE 20.0.3
-![KDE](/assets/imgs/2020/01.png)
+

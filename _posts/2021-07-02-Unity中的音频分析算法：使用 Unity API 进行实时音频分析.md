@@ -25,7 +25,7 @@ math: true
 
 ## Unity3D 
 在Unity引擎中播放声音，我们需要使用 **AudioSource** 组件来播放类型为 AudioClip 的文件。一旦我们将音频导入为 AudioClip ，我们需要将加载类型设置为“Decompress On Load”，以确保我们在运行时访问音频样本数据。
-![AudioClip设置](/assets/imgs/2021/003.png)
+![AudioClip设置](/assets/imgs/2021/003.png){: width="400" height="500" .normal}
 
 我们将 **AudioSource** 组件添加到场景中的游戏物体上，将 AudioClip 拖动到AudioSource中，将播放模式选中为 Play onwake，这样方便一进入到场景就开始播放音频。一旦音频开始播放，Unity API就会提供一些便捷的方法来获取当前正在播放音频的信息。这使得我们对此音频的实时分析变得更简单。
 
@@ -55,7 +55,7 @@ void Update()
     }
 ```
 
-![GetSpectrumData](/assets/imgs/2021/004.png)
+![GetSpectrumData](/assets/imgs/2021/004.png){: width="600" height="300" .normal}
 
 
 
@@ -109,7 +109,7 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
     }
 ```
 测试的结果如下所示：
-![Test](/assets/imgs/2021/005.png)  
+![Test](/assets/imgs/2021/005.png){: width="1073" height="580" .normal}
 
 方便观察，我将数据结果取3位小数，并做成表格：  
 
