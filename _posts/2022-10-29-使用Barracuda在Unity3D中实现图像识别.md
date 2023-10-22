@@ -80,7 +80,7 @@ Unity场景的设置很简单，我们只需要一个Canvas：其中有一个Raw
 
 然后我们通过使用WebCamTexture来读取摄像机的画面。(这里需要额外注意，可以通过设置RawImage的Z轴旋转为-90，否则手机屏幕会是翻转的。)
 
-~~~C#
+```CSharp
  void Start()
     {
         rawImage = GetComponent<RawImage>();
@@ -98,7 +98,7 @@ Unity场景的设置很简单，我们只需要一个Canvas：其中有一个Raw
         rawImage.texture = webcamTexture;
         webcamTexture.Play();
     }
-~~~
+```
 
 
 #### 3.2 图像数据的预处理
@@ -110,7 +110,7 @@ Unity场景的设置很简单，我们只需要一个Canvas：其中有一个Raw
 所以我们需要把图像裁剪成正方形的，并且还需要对图像进行DownSample, 因为我们的输入需要的像素是224*224的，所以尽量保证数据源的像素高的同时，还需要把图片尽量不损失内容的情况下DownSample成我们需要的形状。  
 
 首先我们新建一个renderTexture用来存放结果，这里我们使用的格式是ARGB32. 然后通过Graphics.Blit函数，使用shader的方式来进行图像的裁剪和定位以及次采样. 然后我们通过AsyncGPUReadback来把GPU处理的renderTexture数据传到CPU用来计算。  
-~~~C#
+```
 public void ScaleAndCropImage(WebCamTexture webCamTexture, int desiredSize, UnityAction<byte[]> callback)
     {
         this.callback = callback;
@@ -123,10 +123,10 @@ public void ScaleAndCropImage(WebCamTexture webCamTexture, int desiredSize, Unit
         Graphics.Blit(webCamTexture, renderTexture, scale, offset);
         AsyncGPUReadback.Request(renderTexture, 0, TextureFormat.RGB24, OnCompleteReadback);
     }
-~~~
+```
 这里我们使用了GetData<byte>().ToArray()来将数据转化成需要的格式。
 
-~~~C#
+```CSharp
 void OnCompleteReadback(AsyncGPUReadbackRequest request)
     {
         if (request.hasError)
@@ -136,7 +136,7 @@ void OnCompleteReadback(AsyncGPUReadbackRequest request)
         }
         callback.Invoke(request.GetData<byte>().ToArray());
     }
-~~~
+```
 转化成模型可接受的数据还需要一个步骤就是把RGB[0,255] --> [-1,1]进行一个域转换，然后我们使用到了Barracuda提供的Tensor数据结构。  
 这一步就可以直接让Unity中的数据直接和我们的深度学习模型进行交互了。不过具体的数据的格式还是要看模型需要怎样的输入了，这部分比较个性化，不过基本上都是张量...
 
@@ -158,17 +158,17 @@ void OnCompleteReadback(AsyncGPUReadbackRequest request)
 #### 3.3 模型的推理
 首先引用我们需要的模型文件，这是Barracuda提供给我们的简单应用。ModelLoader允许我们引用模型，WorkerFactory允许我们构建推理引擎。这里WorkerFactory.Type.ComputePrecompiled使用的是GPU推理，当然你需要根据平台和模型来决定最适合的引擎，有基于CPU的引擎等。  
 
-~~~C#
+```CSharp
     var model = ModelLoader.Load(modelFile);
     worker = WorkerFactory.CreateWorker(WorkerFactory.Type.ComputePrecompiled, model);   
-~~~
+```
 然后我们最核心的处理流程来了：
 1. 调用TransformInput生成输入的tensor；
 2. 然后调用 worker.Execute 可以使用神经网路进行推理；
 3. 然后worker.PeekOutput得到largest output；
 4. 根据output得到最大的index，我们自定义一个LoadLabels函数得到index对应的标签，这个标签就是我们想要的结果。
 5. 最后记得手动释放tensor，因为Unity的GC接管不了这些资源。  
-~~~C#
+```CSharp
  IEnumerator RunModelRoutine(byte[] pixels)
     {
         Tensor tensor = TransformInput(pixels);
@@ -190,19 +190,19 @@ void OnCompleteReadback(AsyncGPUReadbackRequest request)
         outputTensor.Dispose();
         yield return null;
     }
-~~~
+```
 
 #### 3.4 根据Index得到标签结果
 
 在一开始我们可以设置一个string[] 存放结果标签，使用index来查表获得结果即可。流程从上一部分的显示结果输出到UI Text开始。
-~~~C#
+```CSharp
     void LoadLabels()
     {
         // 得到index对应的标签
         var stringArray = labelAsset.text.Split('"').Where((item, index) => index % 2 != 0);
         labels = stringArray.Where((x, i) => i % 2 != 0).ToArray();
     }
-~~~
+```
 为了节约资源，我使用Button调用函数，这样我们不必每一帧都执行模型推理，其实实时识别是可以做到的，但是手机的帧率会急剧下降，所以还是建议使用button来决定什么时候进行推理识别。
 
 

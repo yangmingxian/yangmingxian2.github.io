@@ -40,7 +40,7 @@ math: true
 **GetSpectrumData** 将给我们一个表示可以表示为相对振幅的数组，在特定通道上的时间样本的频域上。我们将其称为“频谱数据”。频谱数据对于我们的音频分析非常有用，因为它不仅告诉我们在某个时间点音频的数据，而且还可以告诉我们这些音频的频率范围。这可以帮助我们弄清楚不同频率范围内产生的不同的节拍，我们可以粗略地将其转换为音轨内的不同乐器。下面为使用Unity的DrawLine函数将**GetSpectrumData**表示相对振幅的数组进行了可视化的结果。代码和运行结果如下：
 
 
-```C#
+```CSharp
 void Update()
     {
         float[] spectrum = new float[256];
@@ -92,7 +92,7 @@ Unity 可以通过静态成员 AudioSettings.outputSampleRate 告诉我们混音
 
 事实确实如此！  
 我使用了以下的 Script 做了一个小测试，使用上述的音频，在第128 - 129s 时输出 GetSpectrumData 返回的数组值，我应该会在索引值在10的附近看到显著的结果：
-```C#
+```CSharp
 if (audioSource.time >= 128f && audioSource.time < 129f) 
     {
         float[] curSpectrum = new float[1024];
@@ -137,7 +137,7 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
 有一些更高级的玩法，比如在多个频率范围运行算法，用来消除噪音产生的影响，并且获得不同乐器可能发出的频率范围以及对应的索引值。这些更加复杂的应用可以支持音频分析算法在音乐游戏决策中得到更令人信服的结果。
 
 在这里，我们简单起见一次分析整个频谱。
-```C#
+```CSharp
 
         float sum = 0f;
         for (int i = 0; i < numSamples; i++) 
@@ -154,7 +154,7 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
 
 我们要做的只是对一些过去的一些频谱流值（我们的帧率/2）进行检测。因此，如果我们的帧大小为 30，一旦我们有 30 个光谱通量值，我们就可以通过对值 1-30 取平均值、将平均值乘以某个灵敏度乘数并检查第 15 个值是否超过阈值。然后继续判断第 16 个值是否超过阈值，此时的阈值计算的平均值为第 2-31 的值，依此类推。根据帧速率，实时延迟约 15 个频谱流值会使我们落后于当前播放的音频大约半秒。下面的代码展示了如何计算频谱流的阈值：
 
-```C#
+```CSharp
 
     // spectral flux 窗口的值加和
 	float sum = 0f;
@@ -174,14 +174,14 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
 
 写到这里，突然感觉这个操作和神经网络里面的 ReLU 好像啊哈哈哈。*插个题外话哈，如果有时间我把自己在学校做的关于神经网络激活函数的内容post出来。有学习的需求的可以关注一下我的博客 YMX~*
 
-```C#
+```CSharp
 
 	return Mathf.Max (0f, spectralFluxSamples [spectralFluxIndex].spectralFlux - spectralFluxSamples [spectralFluxIndex].threshold);
 
 ```
 最后我们需要确定每一个 spectral flux 是不是峰值，我们通过比较样本的 pruned spectral flux 和它旁边的邻居，如果它大于先前的 pruned spectral flux 和 它之后的一pruned spectral flux，那他就是峰值呗。所以我们还需要对他之后的一个 flux 进行比较，所以我们又需要将本来就是伪实时的算法再滞后一个 flux 的时间。  
 
-```C#
+```CSharp
     bool isPeak(int spectralFluxIndex) 
     {
         if (spectralFluxSamples [spectralFluxIndex].prunedSpectralFlux > spectralFluxSamples [spectralFluxIndex + 1].prunedSpectralFlux &&
@@ -198,7 +198,7 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
 
 我们使用一个class类来表示 Spectral Flux 的信息，定义如下：  
 
-```C#
+```CSharp
     public class SpectralFluxInfo 
     {
         public float time;
@@ -212,7 +212,7 @@ if (audioSource.time >= 128f && audioSource.time < 129f)
 
 我们在Update函数里面调用 analyzeSpectrum 函数，就可以看到结果了。  
 
-```C#
+```CSharp
 void Update() 
 {
 	audioSource.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
