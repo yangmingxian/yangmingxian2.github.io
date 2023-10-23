@@ -2,7 +2,6 @@
 title: Manjaro 一个很受欢迎的Linux发行版
 author: Mingxian Yang
 date: 2020-05-12 18:10:00 +0800
-description: Manjaro一个很受欢迎的Linux发行版. NexT is a high quality elegant Jekyll theme ported from Hexo Next. It is crafted from scratch, with love.
 categories: [Learning Notes]
 tags: [Linux]
 ---
