@@ -31,7 +31,7 @@ order: 4
 
 - 熟练使用游戏引擎 Unity3D，使用引擎进行原型设计、场景搭建，并使用 C# 脚本编写交互代码实现游戏中的各项系统和玩法功能与逻辑需求；并且对 Unreal Engine 略有了解，有学习游戏引擎的想法。
   
-- 前端和数据库：知道一点点 Html，SQL之类的东西，除了业余会写写自己的博客网站，还为爱丁堡大学医学院开发过一个Wiki网站：[http://hms.mvm.ed.ac.uk/](http://hms.mvm.ed.ac.uk/)
+- 前端和数据库：知道一点点 Html，SQL之类的东西，除了业余会写写自己的博客网站，还为爱丁堡大学医学院开发过一个Wiki网站：[https://hms.mvm.ed.ac.uk/](https://hms.mvm.ed.ac.uk/)
 
 - 在设计和美术方面，了解 Blender 建模和 Substance 贴图，动画均有涉猎，Adobe 全家桶也用过一些，有 Technical Artist 的基础，接触过一点点Houdini
   

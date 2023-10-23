@@ -109,12 +109,12 @@ Boom！我们的原始地牢就这么完成了！
 --- 
 **Ref**：   
 https://enterthegungeon.com/
-http://www.boristhebrave.com/2019/07/28/dungeon-generation-in-enter-the-gungeon/  
+https://www.boristhebrave.com/2019/07/28/dungeon-generation-in-enter-the-gungeon/  
 https://zh.wikipedia.org/zh-cn/%E6%8C%BA%E9%80%B2%E5%9C%B0%E7%89%A2  
 https://enterthegungeon.fandom.com/wiki/Enter_the_Gungeon_Wiki  
 
 
- [**作者博客：YMX's Site**](http://yangmingxian.com/)  
+ [**作者博客：YMX's Site**](https://yangmingxian.com)  
  [**作者B站视频：CyberStreamer**](https://space.bilibili.com/22212765)
 
 

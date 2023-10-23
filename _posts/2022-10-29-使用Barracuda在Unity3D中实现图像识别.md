@@ -226,7 +226,7 @@ void OnCompleteReadback(AsyncGPUReadbackRequest request)
 
 
 ### 5. Others
-- [**作者博客：YMX's Site**](http://yangmingxian.com/)
+- [**作者博客：YMX's Site**](https://yangmingxian.com/)
 - [**作者B站视频：CyberStreamer**](https://space.bilibili.com/22212765)
 
 
